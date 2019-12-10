@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #touch {
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        left: 20px;
+        top: 60px;
+        z-index: 99999;
+    }
+	.bt-box .bg-3{
+        background:#a851fa;
+    }
+	.bt-box .xiaoA{
+		display:block;
+		width:60px;
+		height:60px;
+		position: absolute;
+		z-index: 2;
+		color: white;
+		font: 17px/60px Helvetica, Verdana, sans-serif;
+		text-decoration: none;
+		text-align: center;
+    }
+    .bt-box-p{
+        float: left;
+        margin-top:10px;
+    }
+	.bt-box .xiaoA, .bt-box-p {
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        /* -webkit-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+        -moz-box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+        box-shadow: 2px 2px 8px rgba(0,0,0,0.2); */
+    }
+    .bt-box .bt-box-p{
+        background: #222 ;
+        display: block;
+        height: 40px;
+        width: 50px; 
+        margin: 0 0 0 10px;
+        text-align: center;
+        font: 12px/40px Helvetica, Verdana, sans-serif;
+        color:#fff;
+        position: absolute;
+        z-index: 1;
+        transition: margin 0.5s ease;
+    }
+    .bt-box:hover .bottom {
+        margin: 70px 0 0 5px;
+    }
+    .bt-box:hover .bottom2 {
+		margin: 120px 0 0 5px;
+    }
+    .bt-box:hover .bottom3 {
+		margin: 170px 0 0 5px;
+    }
+    .bt-box .xiaoA:hover {
+		color: #fff;
+        background: #2f7fd5;
+        text-decoration: none;
+	}	
+    </style>
+</head>
+
+<body>
+    <div id="touch" class="bt-box">
+        <a href="#" class="xiaoA bg-3">工具</a>
+        <p class="bottom bt-box-p">显示数字</p>
+        <p class="bottom2 bt-box-p">撤回</p>
+        <p class="bottom3 bt-box-p">完成</p>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+    function but(){
+        console.log(1)
+        var a = document.getElementById('aka')
+        if(a.style.display=="none"){
+            a.style.display="inline"
+            console.log(a.style.display);
+        }
+        else{
+            a.style.display="none"
+            console.log(a.style.display);
+        }
+        console.log(11)
+    }
+    var a;
+    var b;
+    $('#touch').on('touchmove', function(e) {
+        // 阻止其他事件
+        e.preventDefault();
+        // 判断手指数量
+        if (e.originalEvent.targetTouches.length == 1) {
+            // 将元素放在滑动位置
+            var touch = e.originalEvent.targetTouches[0]; 
+            console.log(touch.pageX)
+            // console.log(touch.pageY)
+            a=touch.pageX
+            b=touch.pageY
+            $("#touch").css({'left': touch.pageX + 'px','top': touch.pageY + 'px'});
+        }
+    });
+
+    $('#touch').on('touchend', function(e) {
+        // 阻止其他事件
+        if(a>window.outerWidth-120){
+            a=window.outerWidth-60
+        }
+        else if(a<60){
+            a=0
+        }
+        else if(b>window.outerHeight-120){
+            b=window.outerHeight-120
+        }
+        else if(b<60){
+            b=0
+        }
+        $("#touch").css({'left': a + 'px','top': b + 'px'});
+    })
+</script>
+</html>
