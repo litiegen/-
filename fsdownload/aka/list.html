@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .placeholder {
+            border: 3px dashed #e6e6e6;
+            min-height: 238px;
+            text-align: center;
+            /* background: url(./image.png) center 93px no-repeat; */
+            color: #cccccc;
+            font-size: 18px;
+            position: relative;
+        }
+        .imgbg {
+            width: 146px;
+            box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 4px;
+            padding: 6px;
+            border-width: 0px;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+            float: left;
+            overflow: hidden;
+        }
+        .imgbg img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="placeholder">
+        <!-- <div class="imgbg">
+            <img src="./1.jpg" />
+        </div>
+        <div class="imgbg">
+            <img src="./2.jpg" />
+        </div>
+        <div class="imgbg">
+            <img src="./3.jpg" />
+        </div> -->
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script>
+    $.get("/getlist", function(data) {
+        
+        var imgList = JSON.parse(data);
+        console.log(imgList);
+        for(var i = 0; i < imgList.length; i++) {
+            var liNode = "<div class='imgbg'>" +
+                             "<img src='upload/" + imgList[i] + "' />" +
+                         "</div>";
+            $(".placeholder").append(liNode);
+        }
+    })
+</script>
+</html>
